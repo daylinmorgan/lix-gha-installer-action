@@ -1,8 +1,14 @@
 name: Lix GHA Installer Action
-description: Simple action to install Lix (the independent variant of the Nix package manager). 
+description: Simple action to install Lix (the independent variant of the Nix package manager).
+inputs:
+  extra-conf:
+    description: Extra configuration lines for `/etc/nix/nix.conf`
+    required: false
 runs:
   using: "composite"
   steps:
     - name: Install Lix
       run: bash ${{ github.action_path }}/do-the-lix-thing
+      env:
+        EXTRA_CONF: ${{ inputs.extra-conf }}
       shell: bash
